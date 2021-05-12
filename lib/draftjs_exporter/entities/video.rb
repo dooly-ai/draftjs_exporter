@@ -12,7 +12,7 @@ module DraftjsExporter
       def call(parent_element, data)
         # Check for youtube links, and change watch to embed in order to embed correctly
         src = data.fetch(:data, {}).fetch(:src)
-        if src && src.include? "https://www.youtube.com/watch"
+        if src && src.include?("https://www.youtube.com/watch")
           video_id = src.split("=")[1]
           src = "https://www.youtube.com/embed/#{video_id}"
         end
