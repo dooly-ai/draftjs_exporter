@@ -6,7 +6,7 @@ module DraftjsExporter
 
       def initialize(configuration = { className: nil })
         # Default styles for images
-        @configuration = configuration.merge({allowfullscreen: "1", frameboder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"})
+        @configuration = configuration.merge({allowfullscreen: "1", frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"})
       end
 
       def call(parent_element, data)
@@ -19,6 +19,9 @@ module DraftjsExporter
 
         args = { src:  src}
         args[:class] = configuration.fetch(:className) if configuration[:className]
+        args[:allowfullscreen] = configuration.fetch(:allowfullscreen) if configuration[:allowfullscreen]
+        args[:allow] = configuration.fetch(:allow) if configuration[:allow]
+        args[:frameborder] = configuration.fetch(:frameborder) if configuration[:frameborder]
 
         element = parent_element.document.create_element('iframe', args)
         parent_element.add_child(element)
